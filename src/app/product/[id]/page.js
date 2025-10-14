@@ -52,6 +52,7 @@ export default function ProductDetail() {
                 alt={product.title}
                 fill
                 style={{ objectFit: 'contain' }}
+                priority
               />
             </div>
 

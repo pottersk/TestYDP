@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useWishlist } from '@/context/WishlistContext';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, priority = false }) => {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const inWishlist = isInWishlist(product.id);
 
@@ -50,6 +50,7 @@ const ProductCard = ({ product }) => {
             fill
             style={{ objectFit: 'contain' }}
             className="transition-transform duration-500 ease-out group-hover:scale-110"
+            priority={priority}
           />
           <div className="absolute bottom-2 right-2">
             <span className="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-700">
