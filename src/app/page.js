@@ -136,6 +136,14 @@ function ProductsContent() {
   );
 }
 
+function HomeContent() {
+  return (
+    <Suspense fallback={null}>
+      <ProductsContent />
+    </Suspense>
+  );
+}
+
 export default function Home() {
   return (
     <Suspense fallback={
@@ -146,7 +154,7 @@ export default function Home() {
         </div>
       </div>
     }>
-      <ProductsContent />
+      <HomeContent />
     </Suspense>
   );
 }

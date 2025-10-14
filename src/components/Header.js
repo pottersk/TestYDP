@@ -1,11 +1,12 @@
 'use client';
-import { useState } from 'react';
+
+import { useCart } from '@/context/CartContext';
+import { useState, Suspense } from 'react';
+import { useWishlist } from '@/context/WishlistContext';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCart } from '@/context/CartContext';
-import { useWishlist } from '@/context/WishlistContext';
 
-const Header = () => {
+function HeaderContent() {
   const [open, setOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const { cartItems } = useCart();
@@ -100,54 +101,54 @@ const Header = () => {
                     </svg>
                   </button>
 
-                {showFilters && (
-                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
-                    {categories.map(category => (
-                      <button
-                        key={category.id}
-                        onClick={() => handleCategoryClick(category.id)}
-                        className={`w-full text-left px-4 py-2.5 flex items-center gap-3 transition-all duration-200
-                          ${activeCategory === category.id 
-                            ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium' 
-                            : 'text-gray-700 hover:bg-gray-50'}`}
-                      >
-                        <span className="text-xl">{category.icon}</span>
-                        <span>{category.name}</span>
-                        {activeCategory === category.id && (
-                          <svg className="w-5 h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                          </svg>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <form onSubmit={handleSearch} className="flex-grow max-w-md">
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search products..."
-                    className="w-full px-4 py-2 pl-10 pr-4 rounded-full border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all shadow-sm"
-                  />
-                  <svg
-                    className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                    />
-                  </svg>
+                  {showFilters && (
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
+                      {categories.map(category => (
+                        <button
+                          key={category.id}
+                          onClick={() => handleCategoryClick(category.id)}
+                          className={`w-full text-left px-4 py-2.5 flex items-center gap-3 transition-all duration-200
+                            ${activeCategory === category.id 
+                              ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium' 
+                              : 'text-gray-700 hover:bg-gray-50'}`}
+                        >
+                          <span className="text-xl">{category.icon}</span>
+                          <span>{category.name}</span>
+                          {activeCategory === category.id && (
+                            <svg className="w-5 h-5 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </form>
+
+                <form onSubmit={handleSearch} className="flex-grow max-w-md">
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search products..."
+                      className="w-full px-4 py-2 pl-10 pr-4 rounded-full border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-200 outline-none transition-all shadow-sm"
+                    />
+                    <svg
+                      className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      />
+                    </svg>
+                  </div>
+                </form>
               </div>
 
               <div className="w-1/4 flex items-center justify-end pr-6 space-x-4">
@@ -305,6 +306,14 @@ const Header = () => {
         )}
       </nav>
     </header>
+  );
+}
+
+const Header = () => {
+  return (
+    <Suspense fallback={<div className="w-full h-16 bg-white/90 backdrop-blur-sm rounded-full border border-gray-100 shadow-lg"></div>}>
+      <HeaderContent />
+    </Suspense>
   );
 };
 
