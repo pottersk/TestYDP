@@ -3,11 +3,13 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const { cartItems } = useCart();
+  const { wishlistItems } = useWishlist();
   const router = useRouter();
   const searchParams = useSearchParams();
   const activeCategory = searchParams.get('category') || '';
@@ -73,18 +75,14 @@ const Header = () => {
       <nav className="container mx-auto">
         <div className="w-full bg-white/90 backdrop-blur-sm rounded-full border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-pink-200">
           <div className="flex items-center justify-between px-4 py-1.5 md:px-6 md:py-3">
-            {/* Desktop Layout */}
             <div className="hidden md:flex w-full items-center">
-              {/* Left Section - Logo */}
               <div className="w-1/4 flex justify-start">
                 <Link href="/" className="font-bold text-2xl text-gray-900 hover:text-gray-700 transition-colors pl-[40px]">
                   YDP
                 </Link>
               </div>
 
-              {/* Center Section - Search & Filter */}
               <div className="w-2/4 flex items-center justify-center gap-4">
-                {/* Filter Button with Dropdown */}
                 <div className="relative">
                   <button
                     onClick={() => setShowFilters(!showFilters)}
@@ -102,7 +100,6 @@ const Header = () => {
                     </svg>
                   </button>
 
-                {/* Dropdown Menu */}
                 {showFilters && (
                   <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50">
                     {categories.map(category => (
@@ -127,7 +124,6 @@ const Header = () => {
                 )}
               </div>
 
-              {/* Search Bar */}
               <form onSubmit={handleSearch} className="flex-grow max-w-md">
                 <div className="relative">
                   <input
@@ -154,17 +150,21 @@ const Header = () => {
               </form>
               </div>
 
-              {/* Right Section - Icons */}
               <div className="w-1/4 flex items-center justify-end pr-6 space-x-4">
                 <Link href="/profile" className="p-2 text-gray-700 hover:text-pink-500 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </Link>
-                <Link href="/wishlist" className="p-2 text-gray-700 hover:text-pink-500 transition-colors">
+                <Link href="/wishlist" className="relative p-2 text-gray-700 hover:text-pink-500 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
+                  {wishlistItems?.length > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-pink-500 text-xs font-bold text-white shadow-lg">
+                      {wishlistItems.length}
+                    </span>
+                  )}
                 </Link>
                 <Link href="/cart" className="relative p-2 text-gray-700 hover:text-pink-500 transition-colors">
                   <svg
@@ -190,9 +190,7 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Mobile Layout */}
             <div className="flex md:hidden items-center justify-between w-full">
-              {/* Left - Hamburger */}
               <div className="w-[40px] flex justify-start">
                 <button
                   onClick={() => setOpen((s) => !s)}
@@ -210,12 +208,10 @@ const Header = () => {
                 </button>
               </div>
               
-              {/* Center - Logo */}
               <Link href="/" className="font-bold text-xl text-gray-900 hover:text-gray-700 transition-colors">
                 YDP
               </Link>
               
-              {/* Right - Wishlist + Cart */}
               <div className="flex items-center gap-2">
                 <Link href="/wishlist" className="p-1 text-gray-700 hover:text-pink-500 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -248,11 +244,9 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {open && (
           <div className="absolute left-0 right-0 top-full mt-2 bg-white/95 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-lg md:hidden mx-2">
             <div className="p-3 flex flex-col gap-2">
-              {/* Categories */}
               <div className="border-b border-gray-100 pb-2 mb-2">
                 <p className="text-xs font-semibold text-gray-500 uppercase px-4 mb-2">Categories</p>
                 {categories.map(category => (

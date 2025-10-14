@@ -1,12 +1,49 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useWishlist } from '@/context/WishlistContext';
 
 const ProductCard = ({ product }) => {
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const inWishlist = isInWishlist(product.id);
+
+  const handleWishlistClick = (e) => {
+    e.preventDefault(); // Prevent Link navigation
+    if (inWishlist) {
+      removeFromWishlist(product.id);
+    } else {
+      addToWishlist(product);
+    }
+  };
+
   return (
     <Link href={`/product/${product.id}`}>
       <div className="group relative block overflow-hidden rounded-2xl bg-white/60 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/20 border border-purple-100">
         <div className="relative h-64 w-full overflow-hidden bg-white/80 p-4">
+          <button
+            onClick={handleWishlistClick}
+            className="absolute top-2 right-2 z-10 p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300"
+            aria-label={inWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className={`w-6 h-6 ${
+                inWishlist
+                  ? 'text-red-500 fill-current'
+                  : 'text-gray-400 hover:text-red-500'
+              }`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
+          </button>
           <Image
             src={product.image}
             alt={product.title}
@@ -14,13 +51,11 @@ const ProductCard = ({ product }) => {
             style={{ objectFit: 'contain' }}
             className="transition-transform duration-500 ease-out group-hover:scale-110"
           />
-          {/* Category Badge */}
           <div className="absolute bottom-2 right-2">
             <span className="inline-flex items-center rounded-full bg-purple-100 px-3 py-1 text-xs font-medium text-purple-700">
               {product.category}
             </span>
           </div>
-          {/* Rating Stars */}
           <div className="absolute top-2 left-2 flex items-center bg-white/90 backdrop-blur-sm rounded-full px-2 py-1 shadow-sm">
             {[...Array(5)].map((_, index) => (
               <svg

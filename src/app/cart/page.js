@@ -29,7 +29,6 @@ export default function CartPage() {
         <h1 className="text-3xl font-bold text-gray-800 mb-8">Shopping Cart</h1>
         
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {cartItems.map((item) => (
               <div
@@ -86,7 +85,6 @@ export default function CartPage() {
             ))}
           </div>
           
-          {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg sticky top-24">
               <h2 className="text-xl font-bold text-gray-800 mb-4">Order Summary</h2>

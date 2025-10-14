@@ -46,7 +46,6 @@ export default function ProductDetail() {
       <div className="container mx-auto px-4 py-8">
         <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl">
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Product Image */}
             <div className="relative h-96 bg-white rounded-2xl p-8">
               <Image
                 src={product.image}
@@ -56,7 +55,6 @@ export default function ProductDetail() {
               />
             </div>
 
-            {/* Product Info */}
             <div className="flex flex-col justify-center">
               <span className="inline-block w-fit px-4 py-1 bg-purple-100 text-purple-700 rounded-full text-sm mb-4">
                 {product.category}

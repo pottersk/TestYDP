@@ -1,11 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
   images: {
     unoptimized: true,
-    domains: ['fakestoreapi.com']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'fakestoreapi.com',
+        port: '',
+        pathname: '/img/**',
+      },
+    ],
   },
   trailingSlash: true,
-  reactStrictMode: true,
-  swcMinify: true
+  reactStrictMode: true
 }
+
+export default nextConfig;

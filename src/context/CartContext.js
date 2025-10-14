@@ -6,7 +6,6 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState([]);
 
-  // โหลดข้อมูลจาก localStorage เมื่อเริ่มต้น
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {
@@ -14,7 +13,6 @@ export function CartProvider({ children }) {
     }
   }, []);
 
-  // บันทึกข้อมูลลง localStorage เมื่อ cart เปลี่ยนแปลง
   useEffect(() => {
     if (cartItems.length > 0) {
       localStorage.setItem('cart', JSON.stringify(cartItems));

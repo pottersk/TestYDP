@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const MusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [hasInteracted, setHasInteracted] = useState(false); // เริ่มต้นเป็น false เพื่อรอการ interact ครั้งแรก
+  const [hasInteracted, setHasInteracted] = useState(false); 
   const [currentTrack, setCurrentTrack] = useState(() => {
     if (typeof window !== 'undefined') {
       return parseInt(localStorage.getItem('currentTrackIndex') || '0');
@@ -12,12 +12,10 @@ const MusicPlayer = () => {
   });
   const audioRef = useRef(null);
   
-  // สามารถเพิ่มเพลง Lofi เพิ่มเติมได้ที่นี่
   const playlist = [
     '/music/lofi-1.mp3',
   ];
 
-  // เริ่มเล่นเพลงอัตโนมัติเมื่อมีการโต้ตอบครั้งแรก
   useEffect(() => {
     let hasUserInteracted = false;
 
@@ -32,7 +30,6 @@ const MusicPlayer = () => {
         const playPromise = audioRef.current.play();
         if (playPromise !== undefined) {
           await playPromise;
-          // บันทึกสถานะลง localStorage เมื่อเล่นสำเร็จ
           localStorage.setItem('musicIsPlaying', 'true');
         }
       } catch (error) {
@@ -46,7 +43,6 @@ const MusicPlayer = () => {
       startPlayback();
     };
 
-    // รอการโต้ตอบจากผู้ใช้ (คลิก, แตะ, เลื่อน, กดแป้น, ขยับเมาส์)
     const events = ['click', 'touchstart', 'scroll', 'keydown', 'mousemove'];
     events.forEach(event => {
       document.addEventListener(event, handleInteraction, { once: true, passive: true });
@@ -59,7 +55,6 @@ const MusicPlayer = () => {
     };
   }, []);
 
-  // จัดการการเล่นเพลงเมื่อ track เปลี่ยน หรือโหลดครั้งแรก
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -85,12 +80,10 @@ const MusicPlayer = () => {
 
     playAudio();
 
-    // บันทึกสถานะลง localStorage
     localStorage.setItem('musicIsPlaying', isPlaying.toString());
     localStorage.setItem('currentTrackIndex', currentTrack.toString());
   }, [currentTrack, isPlaying]);
 
-  // จัดการ play/pause
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio || !hasInteracted) return;
@@ -151,7 +144,6 @@ const MusicPlayer = () => {
             </button>
           )}
           
-          {/* แสดงสถานะ */}
           {isPlaying && (
             <div className="flex gap-1 ml-2">
               <span className="w-1 h-4 bg-purple-600 rounded-full animate-pulse"></span>
