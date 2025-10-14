@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
+import dynamic from 'next/dynamic';
 
 export default function ProductsContent() {
   const [products, setProducts] = useState([]);
