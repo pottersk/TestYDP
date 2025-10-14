@@ -3,12 +3,43 @@ import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 
+function SearchParamsHandler({ onCategoryChange }) {
+  const searchParams = useSearchParams();
+  const category = searchParams.get('category');
+
+  useEffect(() => {
+    onCategoryChange(category);
+  }, [category, onCategoryChange]);
+
+  return null;
+}
+
+function ProductList({ products, visibleProducts }) {
+  return (
+    <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-purple-100/50">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {products.map((product, index) => (
+          <div
+            key={product.id}
+            className={`transform transition-all duration-500 ${
+              visibleProducts.includes(index)
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-8'
+            }`}
+          >
+            <ProductCard product={product} priority={index < 4} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ProductsContent() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visibleProducts, setVisibleProducts] = useState([]);
-  const searchParams = useSearchParams();
-  const category = searchParams.get('category');
+  const [currentCategory, setCurrentCategory] = useState(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,8 +48,8 @@ function ProductsContent() {
       try {
         let url = 'https://fakestoreapi.com/products';
         
-        if (category) {
-          url = `https://fakestoreapi.com/products/category/${category}`;
+        if (currentCategory) {
+          url = `https://fakestoreapi.com/products/category/${currentCategory}`;
         }
         
         const response = await fetch(url);
@@ -32,7 +63,7 @@ function ProductsContent() {
     };
 
     fetchProducts();
-  }, [category]);
+  }, [currentCategory]);
 
   useEffect(() => {
     if (!loading && products.length > 0) {
@@ -59,10 +90,14 @@ function ProductsContent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 pt-24 pb-12 px-4">
       <div className="container mx-auto">
+        <Suspense fallback={null}>
+          <SearchParamsHandler onCategoryChange={setCurrentCategory} />
+        </Suspense>
+        
         <div className="text-center mb-12 animate-fade-in">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent inline-block mb-4">
-            {category 
-              ? category.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+            {currentCategory 
+              ? currentCategory.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
               : 'All Products'}
           </h1>
           <div className="flex items-center justify-center gap-2">
@@ -76,22 +111,7 @@ function ProductsContent() {
         </div>
 
         {products.length > 0 ? (
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-purple-100/50">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {products.map((product, index) => (
-                <div
-                  key={product.id}
-                  className={`transform transition-all duration-500 ${
-                    visibleProducts.includes(index)
-                      ? 'opacity-100 translate-y-0'
-                      : 'opacity-0 translate-y-8'
-                  }`}
-                >
-                  <ProductCard product={product} priority={index < 4} />
-                </div>
-              ))}
-            </div>
-          </div>
+          <ProductList products={products} visibleProducts={visibleProducts} />
         ) : (
           <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
             <svg
