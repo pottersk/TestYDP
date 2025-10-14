@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import AddToCartModal from '@/components/AddToCartModal';
 
 export default function ProductDetail() {
   const params = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -80,7 +82,7 @@ export default function ProductDetail() {
               </div>
               
               <button
-                onClick={() => addToCart(product)}
+                onClick={() => setIsModalOpen(true)}
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 rounded-full font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
               >
                 Add to Cart 🛒
@@ -89,6 +91,18 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
+
+      {/* Add to Cart Modal */}
+      <AddToCartModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        product={product}
+        onAddToCart={(product, quantity) => {
+          for (let i = 0; i < quantity; i++) {
+            addToCart(product);
+          }
+        }}
+      />
     </div>
   );
 }

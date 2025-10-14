@@ -1,11 +1,16 @@
 'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useWishlist } from '@/context/WishlistContext';
+import { useCart } from '@/context/CartContext';
+import AddToCartModal from '@/components/AddToCartModal';
 
 const ProductCard = ({ product, priority = false }) => {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
   const inWishlist = isInWishlist(product.id);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleWishlistClick = (e) => {
     e.preventDefault(); // Prevent Link navigation
@@ -16,8 +21,14 @@ const ProductCard = ({ product, priority = false }) => {
     }
   };
 
+  const handleAddToCartClick = (e) => {
+    e.preventDefault(); // Prevent Link navigation
+    setIsModalOpen(true);
+  };
+
   return (
-    <Link href={`/product/${product.id}`}>
+    <>
+      <Link href={`/product/${product.id}`}>
       <div className="group relative block overflow-hidden rounded-2xl bg-white/60 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/20 border border-purple-100">
         <div className="relative h-64 w-full overflow-hidden bg-white/80 p-4">
           <button
@@ -86,19 +97,41 @@ const ProductCard = ({ product, priority = false }) => {
             </h3>
           </div>
           
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex-shrink-0">
-              <p className="text-lg font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <p className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 ${product.price.toFixed(2)}
               </p>
+              <button
+                onClick={handleAddToCartClick}
+                className="flex items-center gap-1 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 px-4 py-2 text-xs font-semibold text-white hover:shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                Add
+              </button>
             </div>
-            <span className="inline-flex items-center rounded-full bg-purple-500 px-3 py-1.5 text-xs font-medium text-white transform transition-all duration-300 ease-out group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-purple-500/25">
+            <span className="inline-flex items-center justify-center rounded-full bg-purple-100 px-3 py-1.5 text-xs font-medium text-purple-700 group-hover:bg-purple-500 group-hover:text-white transition-all duration-300">
               View Details →
             </span>
           </div>
         </div>
       </div>
     </Link>
+
+    {/* Add to Cart Modal */}
+    <AddToCartModal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      product={product}
+      onAddToCart={(product, quantity) => {
+        for (let i = 0; i < quantity; i++) {
+          addToCart(product);
+        }
+      }}
+    />
+    </>
   );
 };
 
