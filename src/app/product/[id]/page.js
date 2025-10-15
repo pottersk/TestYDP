@@ -45,9 +45,6 @@ export default function ProductDetail() {
 
   return (
     <>
-      <style jsx global>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
-      `}</style>
       <div className="min-h-screen bg-slate-50 pt-24">
         <div className="container mx-auto px-4 py-12">
           <div className="bg-white rounded-3xl p-10 shadow-xl border border-slate-200">
