@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 
 function ProductList({ products, visibleProducts }) {
@@ -24,6 +24,7 @@ function ProductList({ products, visibleProducts }) {
 
 function ProductsContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -106,7 +107,7 @@ function ProductsContent() {
     }
     
     const queryString = params.toString();
-    window.location.href = queryString ? `/?${queryString}` : '/';
+    router.push(queryString ? `/?${queryString}` : '/');
     setShowFilters(false);
   };
 
@@ -121,7 +122,7 @@ function ProductsContent() {
     }
     
     const queryString = params.toString();
-    window.location.href = queryString ? `/?${queryString}` : '/';
+    router.push(queryString ? `/?${queryString}` : '/');
   };
 
   if (loading) {
@@ -160,7 +161,6 @@ function ProductsContent() {
             </p>
           </div>
           
-          {/* Desktop Search and Filter - Hidden on Mobile */}
           <div className="hidden md:flex items-center gap-3 flex-shrink-0">
             <div className="relative">
               <button
