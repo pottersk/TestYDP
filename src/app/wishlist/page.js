@@ -6,24 +6,19 @@ export default function WishlistPage() {
   const { wishlistItems } = useWishlist();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 pt-24 pb-12 px-4">
+    <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent inline-block mb-4">
+        <div className="mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
             My Wishlist
           </h1>
-          <div className="flex items-center justify-center gap-2">
-            <span className="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500">
-              <span className="text-white text-sm font-medium">{wishlistItems.length}</span>
-            </span>
-            <p className="text-gray-600 font-medium">
-              {wishlistItems.length === 1 ? 'Item' : 'Items'} Saved
-            </p>
-          </div>
+          <p className="text-slate-600 text-sm">
+            {wishlistItems.length} {wishlistItems.length === 1 ? 'item' : 'items'} saved
+          </p>
         </div>
 
         {wishlistItems.length > 0 ? (
-          <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl p-8 border border-purple-100/50">
+          <div className="bg-white rounded-2xl shadow-md p-8 md:p-10 border border-slate-200">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {wishlistItems.map((product) => (
                 <div key={product.id}>
@@ -33,22 +28,12 @@ export default function WishlistPage() {
             </div>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
-            <svg
-              className="w-24 h-24 text-gray-300 mb-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              />
+          <div className="flex flex-col items-center justify-center py-24 bg-white rounded-2xl shadow-md border border-slate-200">
+            <svg className="w-24 h-24 text-slate-300 mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
             </svg>
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">Your wishlist is empty</h3>
-            <p className="text-gray-500">Start adding some items to your wishlist!</p>
+            <h3 className="text-2xl font-bold text-slate-900 mb-3">Your wishlist is empty</h3>
+            <p className="text-slate-600 text-base">Save items you love for later</p>
           </div>
         )}
       </div>
