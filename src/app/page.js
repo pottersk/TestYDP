@@ -89,27 +89,27 @@ function ProductsContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 pt-32 pb-12">
+    <div className="min-h-screen bg-slate-50 pt-20 md:pt-32 pb-12">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-6 md:mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">
+            <h1 className="text-xl md:text-3xl font-bold text-slate-900 mb-1 md:mb-2">
               {currentCategory ? currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1) : 'All Products'}
             </h1>
-            <p className="text-sm text-slate-600">
+            <p className="text-xs md:text-sm text-slate-600">
               {products.length} {products.length === 1 ? 'item' : 'items'} available
             </p>
           </div>
         </div>
 
         {products.length > 0 ? (
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-md p-6 md:p-8">
+          <div className="bg-white rounded-xl md:rounded-2xl border border-slate-200 shadow-sm md:shadow-md p-4 md:p-8">
             <ProductList products={products} visibleProducts={visibleProducts} />
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-20 bg-white border border-slate-200 rounded-2xl shadow-md">
+          <div className="flex flex-col items-center justify-center py-12 md:py-20 bg-white border border-slate-200 rounded-xl md:rounded-2xl shadow-sm md:shadow-md">
             <svg
-              className="w-16 h-16 text-slate-300 mb-4"
+              className="w-12 h-12 md:w-16 md:h-16 text-slate-300 mb-3 md:mb-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -121,8 +121,8 @@ function ProductsContent() {
                 d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
               />
             </svg>
-            <h3 className="text-xl font-medium text-slate-700 mb-2">No Products Found</h3>
-            <p className="text-slate-500 text-sm">Try selecting a different category</p>
+            <h3 className="text-lg md:text-xl font-medium text-slate-700 mb-2">No Products Found</h3>
+            <p className="text-slate-500 text-xs md:text-sm">Try selecting a different category</p>
           </div>
         )}
       </div>
