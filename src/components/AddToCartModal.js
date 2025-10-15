@@ -20,17 +20,6 @@ export default function AddToCartModal({ isOpen, onClose, product, onAddToCart }
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
-
   if (!isOpen || !product || !mounted) return null;
 
   const handleAddToCart = () => {
@@ -57,13 +46,13 @@ export default function AddToCartModal({ isOpen, onClose, product, onAddToCart }
   const totalPrice = (product.price * quantity).toFixed(2);
 
   const modalContent = (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 animate-fadeIn">
       <div
-        className="absolute inset-0 bg-black/50"
+        className="absolute inset-0 bg-black/50 animate-fadeIn"
         onClick={onClose}
       />
 
-      <div className="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+      <div className="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto animate-slideUp">
         <div
           className="bg-white rounded-lg shadow-lg overflow-hidden"
           onClick={(e) => e.stopPropagation()}
@@ -111,7 +100,9 @@ export default function AddToCartModal({ isOpen, onClose, product, onAddToCart }
                     {product.category}
                   </p>
                   <div className="flex items-center gap-1 text-sm">
-                    <span className="text-yellow-400">★</span>
+                    <svg className="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
                     <span className="text-gray-700">
                       {product.rating?.rate}
                     </span>
@@ -131,18 +122,18 @@ export default function AddToCartModal({ isOpen, onClose, product, onAddToCart }
                 <button
                   onClick={decrementQuantity}
                   disabled={quantity <= 1}
-                  className="w-8 h-8 rounded border border-gray-300 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center text-gray-600"
+                  className="w-8 h-8 rounded border border-gray-300 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center text-gray-600 transition-all duration-200 hover:scale-110 active:scale-95"
                 >
                   −
                 </button>
                 
-                <span className="text-base font-medium text-gray-900 min-w-[2rem] text-center">
+                <span className="text-base font-medium text-gray-900 min-w-[2rem] text-center transition-all duration-200">
                   {quantity}
                 </span>
 
                 <button
                   onClick={incrementQuantity}
-                  className="w-8 h-8 rounded border border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-600"
+                  className="w-8 h-8 rounded border border-gray-300 hover:bg-gray-50 flex items-center justify-center text-gray-600 transition-all duration-200 hover:scale-110 active:scale-95"
                 >
                   +
                 </button>
@@ -171,14 +162,14 @@ export default function AddToCartModal({ isOpen, onClose, product, onAddToCart }
             <div className="flex gap-3">
               <button
                 onClick={handleAddToCart}
-                className="flex-1 py-2.5 px-4 rounded border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="flex-1 py-2.5 px-4 rounded border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-all duration-200 hover:scale-105"
               >
                 Add to Cart
               </button>
 
               <button
                 onClick={handleCheckout}
-                className="flex-1 py-2.5 px-4 rounded bg-blue-600 text-sm font-medium text-white hover:bg-blue-700"
+                className="flex-1 py-2.5 px-4 rounded bg-slate-800 text-sm font-medium text-white hover:bg-slate-900 transition-all duration-200 hover:scale-105"
               >
                 Buy Now
               </button>

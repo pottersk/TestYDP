@@ -18,7 +18,7 @@ function CartContent() {
           <p className="text-slate-600 text-sm md:text-base mb-6 md:mb-8">Start adding items to your cart</p>
           <Link
             href="/"
-            className="inline-block px-6 md:px-8 py-2.5 md:py-3 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm transition-colors"
+            className="inline-block px-6 md:px-8 py-2.5 md:py-3 rounded-lg bg-slate-800 hover:bg-slate-900 text-white font-medium text-sm transition-all duration-200 hover:scale-105 active:scale-95"
           >
             Continue Shopping
           </Link>
@@ -27,12 +27,16 @@ function CartContent() {
     );
   }
 
+  const totalItemsCount = cartItems.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
+
   return (
     <div className="container mx-auto px-4">
       <div className="mb-6 md:mb-12">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-1 md:mb-2">Shopping Cart</h1>
         <p className="text-slate-600 text-xs md:text-sm">
-          {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart
+          {totalItemsCount} {totalItemsCount === 1 ? 'item' : 'items'} in your cart
         </p>
       </div>
       
@@ -42,10 +46,10 @@ function CartContent() {
             {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-slate-50 rounded-lg md:rounded-xl border border-slate-200 p-4 md:p-5"
+                className="bg-slate-50 rounded-lg md:rounded-xl border border-slate-200 p-4 md:p-5 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5"
               >
                 <div className="flex gap-3 md:gap-4">
-                  <Link href={`/product/${item.id}`} className="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg bg-white border border-slate-200 p-2 hover:border-indigo-300 transition-colors">
+                  <Link href={`/product/${item.id}`} className="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg bg-white border border-slate-200 p-2 hover:border-slate-400 transition-all duration-200 hover:scale-105">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -55,12 +59,12 @@ function CartContent() {
                   </Link>
                   
                   <div className="flex-1 min-w-0 flex flex-col">
-                    <Link href={`/product/${item.id}`} className="hover:text-indigo-600 transition-colors">
+                    <Link href={`/product/${item.id}`} className="hover:text-slate-700 transition-all duration-200">
                       <h3 className="font-medium text-slate-900 mb-1 text-sm md:text-base line-clamp-2">
                         {item.title}
                       </h3>
                     </Link>
-                    <p className="text-base md:text-xl font-semibold text-indigo-600 mb-3 md:mb-4">
+                    <p className="text-base md:text-xl font-semibold text-slate-800 mb-3 md:mb-4">
                       ${item.price.toFixed(2)}
                     </p>
                     
@@ -68,16 +72,16 @@ function CartContent() {
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="w-7 h-7 md:w-8 md:h-8 rounded border border-gray-300 hover:bg-gray-50 text-gray-600 transition-colors flex items-center justify-center text-sm"
+                          className="w-7 h-7 md:w-8 md:h-8 rounded border border-gray-300 hover:bg-gray-50 text-gray-600 transition-all duration-200 flex items-center justify-center text-sm hover:scale-110 active:scale-95"
                         >
                           −
                         </button>
-                        <span className="w-8 md:w-10 text-center font-medium text-slate-900 text-sm md:text-base">
+                        <span className="w-8 md:w-10 text-center font-medium text-slate-900 text-sm md:text-base transition-all duration-200">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="w-7 h-7 md:w-8 md:h-8 rounded border border-gray-300 hover:bg-gray-50 text-gray-600 transition-colors flex items-center justify-center text-sm"
+                          className="w-7 h-7 md:w-8 md:h-8 rounded border border-gray-300 hover:bg-gray-50 text-gray-600 transition-all duration-200 flex items-center justify-center text-sm hover:scale-110 active:scale-95"
                         >
                           +
                         </button>
@@ -85,7 +89,7 @@ function CartContent() {
                       
                       <button
                         onClick={() => removeFromCart(item.id)}
-                        className="px-3 py-1.5 rounded text-red-600 hover:bg-red-50 transition-colors text-xs md:text-sm font-medium flex items-center gap-1"
+                        className="px-3 py-1.5 rounded text-red-600 hover:bg-red-50 transition-all duration-200 text-xs md:text-sm font-medium flex items-center gap-1 hover:scale-105 active:scale-95"
                       >
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -118,7 +122,7 @@ function CartContent() {
                 </div>
               </div>
               
-              <button className="w-full rounded-lg bg-blue-600 hover:bg-blue-700 text-white py-2.5 md:py-3 font-medium text-sm transition-colors">
+              <button className="w-full rounded-lg bg-slate-800 hover:bg-slate-900 text-white py-2.5 md:py-3 font-medium text-sm transition-all duration-200 hover:scale-105 active:scale-95">
                 Proceed to Checkout
               </button>
             </div>
@@ -131,7 +135,7 @@ function CartContent() {
 
 export default function CartPage() {
   return (
-    <div className="min-h-screen bg-slate-50 pt-20 md:pt-24 pb-12 px-4">
+    <div className="min-h-screen bg-slate-100/40 pt-20 md:pt-24 pb-12 px-4">
       <Suspense fallback={
         <div className="container mx-auto py-16 text-center">
           <div className="text-xl md:text-2xl font-bold text-slate-800">Loading cart...</div>

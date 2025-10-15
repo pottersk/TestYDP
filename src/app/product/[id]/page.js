@@ -31,7 +31,7 @@ export default function ProductDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center animate-fadeIn">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
       </div>
     );
@@ -47,13 +47,13 @@ export default function ProductDetail() {
 
   return (
     <>
-      <div className="min-h-screen bg-slate-50 pt-20 md:pt-24">
+      <div className="min-h-screen bg-slate-100/40 pt-20 md:pt-24">
         <div className="container mx-auto px-4 py-4 md:py-12">
-          <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-10 shadow-lg md:shadow-xl border border-slate-200">
+          <div className="bg-slate-100/50 rounded-2xl md:rounded-3xl p-4 md:p-10 shadow-lg md:shadow-xl border border-slate-200/50 animate-fadeIn">
             <div className="grid md:grid-cols-2 gap-6 md:gap-12">
               {/* Product Image with White Background */}
               <div className="flex items-center justify-center">
-                <div className="relative w-full h-64 md:h-96 bg-white rounded-xl md:rounded-2xl p-4 md:p-8 shadow-sm md:shadow-md border border-slate-100 md:border-2">
+                <div className="relative w-full h-64 md:h-96 bg-white rounded-xl md:rounded-2xl p-4 md:p-8 shadow-sm md:shadow-md border border-slate-100 md:border-2 transition-all duration-300 hover:shadow-xl hover:scale-105">
                   <Image
                     src={product.image}
                     alt={product.title}
@@ -77,20 +77,22 @@ export default function ProductDetail() {
                   {product.description}
                 </p>
                 
-                <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-8 bg-slate-50 border border-slate-200 md:border-2 px-3 md:px-5 py-2 md:py-4 rounded-lg md:rounded-2xl w-fit shadow-sm">
-                  <span className="text-lg md:text-2xl">⭐</span>
-                  <span className="font-bold text-slate-900 text-base md:text-lg">{product.rating?.rate}</span>
+                <div className="flex items-center gap-2 md:gap-3 mb-4 md:mb-8">
+                  <svg className="w-5 h-5 md:w-6 md:h-6 text-amber-500 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <span className="font-bold text-slate-800 text-base md:text-lg">{product.rating?.rate.toFixed(1)}</span>
                   <span className="text-slate-600 font-medium md:font-bold text-xs md:text-sm">({product.rating?.count} reviews)</span>
                 </div>
                 
-                <div className="text-3xl md:text-5xl font-bold text-indigo-600 mb-5 md:mb-10">
+                <div className="text-3xl md:text-5xl font-bold text-slate-800 mb-5 md:mb-10">
                   ${product.price.toFixed(2)}
                 </div>
                 
                 <div className="flex gap-3">
                   <button
                     onClick={() => setIsModalOpen(true)}
-                    className="flex-1 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white py-3 md:py-4 font-medium text-sm md:text-base transition-colors shadow-sm"
+                    className="flex-1 rounded-lg bg-slate-800 hover:bg-slate-900 text-white py-3 md:py-4 font-medium text-sm md:text-base transition-all duration-200 shadow-sm hover:scale-105 active:scale-95"
                   >
                     Add to Cart
                   </button>
@@ -103,7 +105,7 @@ export default function ProductDetail() {
                         addToWishlist(product);
                       }
                     }}
-                    className={`px-4 md:px-6 rounded-lg border-2 transition-all duration-200 shadow-sm ${
+                    className={`px-4 md:px-6 rounded-lg border-2 transition-all duration-200 shadow-sm hover:scale-110 active:scale-95 ${
                       isInWishlist(product.id)
                         ? 'bg-rose-50 border-rose-500 text-rose-500 hover:bg-rose-100'
                         : 'bg-white border-slate-300 text-slate-600 hover:border-rose-500 hover:text-rose-500'

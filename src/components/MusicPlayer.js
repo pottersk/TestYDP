@@ -117,7 +117,7 @@ const MusicPlayer = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={togglePlay}
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-purple-600 text-white hover:bg-purple-700 transition-colors"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 text-white hover:bg-slate-900 transition-colors"
             aria-label={isPlaying ? 'Pause' : 'Play'}
           >
             {isPlaying ? (
@@ -135,7 +135,7 @@ const MusicPlayer = () => {
           {playlist.length > 1 && (
             <button
               onClick={playNextTrack}
-              className="w-8 h-8 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 hover:bg-purple-200 transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-800 hover:bg-slate-200 transition-colors"
               aria-label="Next track"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -146,9 +146,9 @@ const MusicPlayer = () => {
           
           {isPlaying && (
             <div className="flex gap-1 ml-2">
-              <span className="w-1 h-4 bg-purple-600 rounded-full animate-pulse"></span>
-              <span className="w-1 h-4 bg-purple-600 rounded-full animate-pulse delay-75"></span>
-              <span className="w-1 h-4 bg-purple-600 rounded-full animate-pulse delay-150"></span>
+              <span className="w-1 h-4 bg-slate-800 rounded-full animate-pulse"></span>
+              <span className="w-1 h-4 bg-slate-800 rounded-full animate-pulse delay-75"></span>
+              <span className="w-1 h-4 bg-slate-800 rounded-full animate-pulse delay-150"></span>
             </div>
           )}
         </div>

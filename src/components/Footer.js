@@ -15,17 +15,17 @@ const Footer = () => {
   const linksGridClass = "grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 mb-10 md:mb-12 max-w-xl mx-auto";
   const linkColumnClass = "text-center md:text-left";
   const linkTitleClass = "text-sm font-semibold text-slate-900 uppercase tracking-wider mb-4";
-  const linkItemClass = "text-slate-600 hover:text-indigo-600 text-sm transition-colors inline-block";
+  const linkItemClass = "text-slate-600 hover:text-slate-900 text-sm transition-all duration-200 inline-block hover:translate-x-1";
   
   const socialContainerClass = "flex items-center justify-center space-x-3 mb-10 md:mb-12";
-  const socialButtonClass = "w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-white hover:bg-slate-700 transition-colors";
+  const socialButtonClass = "w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-white hover:bg-slate-900 transition-all duration-200 hover:scale-110 active:scale-95";
   const socialIconClass = "w-5 h-5";
   
   const bottomSectionClass = "border-t border-slate-200 pt-6 md:pt-8";
   const bottomContainerClass = "flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-8";
   const copyrightClass = "text-slate-600 text-sm";
   const bottomLinksClass = "flex items-center space-x-6 text-sm";
-  const bottomLinkClass = "text-slate-600 hover:text-indigo-600 transition-colors";
+  const bottomLinkClass = "text-slate-600 hover:text-slate-900 transition-all duration-200 hover:translate-x-1";
 
   return (
     <footer className={footerClass}>

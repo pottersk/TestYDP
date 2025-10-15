@@ -1,65 +1,115 @@
 # YDP E-Commerce Platform 🛍️
 
-A modern, full-stack e-commerce web application built with Next.js 15, featuring a beautiful UI, shopping cart, wishlist functionality, and background music player.
+**Young Developer Power - Full-stack Track Mini Project**
+
+A modern, full-stack e-commerce web application built with Next.js 15, featuring a beautiful UI, shopping cart, wishlist functionality, and fully responsive design.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.5.5-black)
 ![React](https://img.shields.io/badge/React-19.1.0-blue)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38bdf8)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+## 📌 Project Overview
+
+This project is a **Mini Project** submission for the **Young Developer Power - Full-stack Track** program. The objective was to create a full-stack e-commerce product browsing page with responsive design and modern web technologies.
+
 ## 📋 Table of Contents
 
+- [Project Requirements Coverage](#project-requirements-coverage)
 - [Features](#features)
-- [Technology Stack](#technology-stack)
+- [Technology Stack & Why](#technology-stack--why)
 - [Architecture](#architecture)
-- [Installation](#installation)
-- [Usage](#usage)
+- [Installation & Usage](#installation--usage)
 - [Project Structure](#project-structure)
-- [API Routes](#api-routes)
+- [API Integration](#api-integration)
 - [Error Handling](#error-handling)
+- [Code Quality](#code-quality)
 - [Version Control](#version-control)
 - [Deployment](#deployment)
-- [Contributing](#contributing)
+- [Presentation](#presentation)
+
+## 🎯 Project Requirements Coverage
+
+### ✅ Functional Requirements (100% Complete)
+- ✅ **Browse All Products** - Display all products from Fake Store API
+- ✅ **Product Details Page** - Click on any product to view detailed information
+- ✅ **Category Filtering** - Filter products by categories (Electronics, Jewelry, Clothing)
+- ✅ **Responsive Design** - Works perfectly on mobile phones and computers
+- ✅ **Additional Features** - Shopping cart, wishlist, and search functionality
+
+### ✅ Non-Functional Requirements (100% Complete)
+- ✅ **Responsive Web Design** - Mobile-first approach, optimized for all screen sizes
+- ✅ **Performance** - Fast loading with Next.js optimizations
+- ✅ **Error Handling** - Comprehensive error handling throughout the application
+- ✅ **Code Quality** - Clean, readable code with proper structure
+- ✅ **Documentation** - Complete documentation with installation guide
+- ✅ **Version Control** - Git & GitHub with meaningful commits
+- ✅ **Deployment** - Live deployment on Render.com
 
 ## ✨ Features
 
-### Core Features
-- 🛒 **Shopping Cart System** - Add, remove, update quantities with persistent state
-- ❤️ **Wishlist Functionality** - Save favorite products for later
-- 🎵 **Background Music Player** - Ambient shopping experience with play/pause controls
-- 📱 **Responsive Design** - Optimized for desktop, tablet, and mobile devices
-- 🔍 **Product Search & Filter** - Real-time search and category filtering
-- 🎨 **Beautiful UI/UX** - Gradient designs, smooth animations, and modern aesthetics
-- ⚡ **Fast Performance** - Optimized with Next.js 15 App Router and React 19
+### Required Features
+- 🛍️ **Product Listing** - Browse all products with images, prices, and ratings
+- 🔍 **Category Filter** - Filter products by Electronics, Jewelry, Men's & Women's Clothing
+- 📱 **Fully Responsive** - Optimized for mobile phones, tablets, and desktop computers
+- 📄 **Product Details** - Click on any product to view detailed information
 
-### Technical Features
-- Server-Side Rendering (SSR) and Static Site Generation (SSG)
-- Client-side state management with React Context API
-- RESTful API integration with Fake Store API
-- Dynamic routing for product details
-- Image optimization with Next.js Image component
-- Error boundaries and comprehensive error handling
-- Suspense boundaries for async components
+### Additional Features (Bonus)
+- 🛒 **Shopping Cart** - Add products to cart with quantity management
+- ❤️ **Wishlist** - Save favorite products for later
+- 🔎 **Search** - Real-time product search functionality
+- ⚡ **Fast Performance** - Optimized with Next.js 15 App Router
+- 🎨 **Modern UI** - Clean, professional design with smooth animations
 
-## 🛠️ Technology Stack
+## 🛠️ Technology Stack & Why
 
-### Frontend
-- **Framework**: Next.js 15.5.5 (React 19.1.0)
-- **Styling**: TailwindCSS 4.0
-- **State Management**: React Context API
-- **Routing**: Next.js App Router
-- **Image Optimization**: Next.js Image Component
+### Frontend Technologies
 
-### Backend
-- **API Routes**: Next.js API Routes (Serverless)
-- **External API**: Fake Store API (https://fakestoreapi.com)
-- **HTTP Client**: Native Fetch API
+#### Next.js 15.5.5 + React 19.1.0
+**Why I chose this:**
+- **Full-stack Framework** - Can handle both frontend and backend in one project
+- **Server-Side Rendering** - Better SEO and faster initial page load
+- **App Router** - Modern routing system with layouts and nested routes
+- **Built-in Optimization** - Automatic image, font, and code optimization
+- **Easy Deployment** - Simple to deploy on platforms like Vercel or Render
+- **Popular & Well-documented** - Large community support and extensive documentation
+
+#### TailwindCSS 4.0
+**Why I chose this:**
+- **Rapid Development** - Build UI quickly with utility classes
+- **Responsive Design** - Built-in breakpoints for mobile-first design
+- **Customizable** - Easy to customize colors, spacing, and styles
+- **No CSS File Bloat** - Automatically removes unused CSS in production
+- **Modern Features** - Support for gradients, animations, and modern CSS
+
+#### React Context API
+**Why I chose this:**
+- **Built-in Solution** - No need to install additional state management libraries
+- **Simple & Efficient** - Easy to understand and implement for this project scale
+- **No Over-engineering** - Redux would be overkill for this project size
+- **Good Performance** - Optimized re-renders with proper component structure
+
+### Backend Technologies
+
+#### Next.js API Routes
+**Why I chose this:**
+- **Serverless Functions** - No need to set up a separate Express server
+- **Same Project** - Backend and frontend in one codebase
+- **Easy to Deploy** - Deploy everything together
+- **TypeScript Support** - Built-in TypeScript support if needed
+
+#### Fake Store API
+**Why I chose this:**
+- **Free & Open** - No API key or authentication required
+- **Realistic Data** - Real product data with images, prices, ratings
+- **Good Documentation** - Clear API documentation and examples
+- **Reliable** - Stable API with good uptime
 
 ### Development Tools
-- **Package Manager**: npm
-- **Linting**: ESLint 9 with Next.js Config
-- **Version Control**: Git & GitHub
-- **Deployment**: Render.com
+- **npm** - Node package manager for dependencies
+- **ESLint** - Code linting for code quality
+- **Git & GitHub** - Version control and code hosting
+- **Render.com** - Free hosting for deployment
 
 ## 🏗️ Architecture
 
