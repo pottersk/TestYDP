@@ -137,21 +137,21 @@ function ProductsContent() {
 
   const getCategoryDisplayName = () => {
     const categoryMap = {
-      'electronics': '💻 Electronics',
-      'jewelery': '💎 Jewelry',
-      "men's clothing": "👔 Men's Clothing",
-      "women's clothing": "👗 Women's Clothing"
+      'electronics': 'Electronics',
+      'jewelery': 'Jewelry',
+      "men's clothing": "Men's Clothing",
+      "women's clothing": "Women's Clothing"
     };
-    
-    if (!currentCategory) return '🛍️ All Products';
+
+    if (!currentCategory) return 'All Products';
     return categoryMap[currentCategory] || currentCategory;
   };
 
   return (
     <div className="min-h-screen bg-slate-100/40 pt-20 md:pt-32 pb-12">
-      <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6 md:mb-8">
-          <div className="text-center">
+      <div className="container mx-auto px-8 md:px-11">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6 md:mb-8">
+          <div className="text-left">
             <h1 className="text-xl md:text-3xl font-bold text-slate-900 mb-1 md:mb-2">
               {currentCategory ? currentCategory.charAt(0).toUpperCase() + currentCategory.slice(1) : 'All Products'}
             </h1>

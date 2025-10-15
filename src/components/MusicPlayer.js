@@ -59,30 +59,18 @@ const MusicPlayer = () => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    const playAudio = async () => {
-      try {
-        audio.load();
-        
-        if (isPlaying) {
-          const playPromise = audio.play();
-          if (playPromise !== undefined) {
-            playPromise.catch(error => {
-              console.log("Playback error:", error);
-              setIsPlaying(false);
-            });
-          }
-        }
-      } catch (error) {
+    // โหลดเพลงใหม่เฉพาะเมื่อเปลี่ยนแทร็ก
+    audio.load();
+    
+    if (isPlaying) {
+      audio.play().catch(error => {
         console.log("Playback error:", error);
         setIsPlaying(false);
-      }
-    };
+      });
+    }
 
-    playAudio();
-
-    localStorage.setItem('musicIsPlaying', isPlaying.toString());
     localStorage.setItem('currentTrackIndex', currentTrack.toString());
-  }, [currentTrack, isPlaying]);
+  }, [currentTrack]); // เอา isPlaying ออก
 
   useEffect(() => {
     const audio = audioRef.current;
