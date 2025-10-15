@@ -77,11 +77,11 @@ function HeaderContent() {
               </Link>
 
               <div className="flex items-center space-x-2">
-                <Link href="/profile" className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-all duration-200 hover:scale-110 active:scale-95">
+                <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-all duration-200 hover:scale-110 active:scale-95">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
-                </Link>
+                </a>
                 <Link href="/wishlist" className="relative p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-all duration-200 hover:scale-110 active:scale-95">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -197,7 +197,7 @@ function HeaderContent() {
                 ))}
               </div>
               <Link
-                href="/profile"
+                href="https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1"
                 onClick={() => setOpen(false)}
                 className="text-slate-700 hover:bg-slate-50 px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-3 font-medium text-sm hover:translate-x-1"
               >
