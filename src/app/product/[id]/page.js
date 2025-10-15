@@ -47,9 +47,9 @@ export default function ProductDetail() {
 
   return (
     <>
-      <div className="min-h-screen bg-slate-100/40 pt-20 md:pt-24">
+      <div className="min-h-screen bg-white pt-20 md:pt-24">
         <div className="container mx-auto px-4 py-4 md:py-12">
-          <div className="bg-slate-100/50 rounded-2xl md:rounded-3xl p-4 md:p-10 shadow-lg md:shadow-xl border border-slate-200/50 animate-fadeIn">
+          <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-10 shadow-lg md:shadow-xl border border-slate-200/50 animate-fadeIn">
             <div className="grid md:grid-cols-2 gap-6 md:gap-12">
               {/* Product Image with White Background */}
               <div className="flex items-center justify-center">
